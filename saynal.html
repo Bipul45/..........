@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('bg-image.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    .lock-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(255, 255, 255, 0.95);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .lock-screen h1 {
+      font-size: 28px;
+      color: purple;
+      margin-bottom: 10px;
+      border: 3px solid orange;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .lock-screen p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .lock-screen input {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+    .lock-screen button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #cc0052;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      color: black;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      position: relative;
+      z-index: 1;
+    }
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: black;
+    }
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 90%;
+    }
+    .image-gallery img {
+      width: 45%;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease-in-out;
+    }
+    .image-gallery img:hover {
+      transform: scale(1.05);
+    }
+    .gallery-heading {
+      text-align: center;
+      font-size: 22px;
+      color: black;
+      font-weight: bold;
+      margin-top: 40px;
+    }
+    #main-content {
+      display: none;
+    }
+    .light-flash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle, rgba(255,223,0,0.95) 0%, rgba(255,223,0,0.2) 80%, transparent 100%);
+      z-index: 1000;
+      display: none;
+      animation: slideFade 5s ease-in-out forwards;
+    }
+    @keyframes slideFade {
+      0% {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: center;
+      }
+      50% {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scaleY(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="birthdayMusic" src="birthday-song.mp3" autoplay loop></audio>
+  <div class="light-flash" id="lightFlash"></div>
+  <div class="lock-screen" id="lockScreen">
+    <h1>🎉 Happy Birthday Bharti 🎉</h1>
+    <p>Enter the special code to unlock your surprise!</p>
+    <input type="text" id="unlockCode" placeholder="Enter your code"/>
+    <button onclick="checkCode()">Unlock Surprise</button>
+  </div>  <div id="main-content">
+    <div class="overlay">
+      <h2>Happy birthday, my love 💕</h2>
+      <p>
+Every day with you is a blessing, and I'm so thankful to God for bringing you into my life. Calling you my partner fills my heart with pure joy. To be honest, I never imagined I'd meet someone as incredible as you. But here you are, becoming everything I've ever wanted and more—a true peace of mind.Words fail to capture just how special you are to me. You've become a part of me in a way I didn't think was possible, and I hope that this connection only grows as time goes on. I like you so much, more than I've ever liked anyone before. Falling for you has been the best thing that ever happened to me, and I hope we continue to create beautiful memories together.
+
+The day we first connected will always be our day—the day everything changed for the better. Meeting you has been the greatest blessing of my life, and I can't wait to celebrate many more birthdays with you. The love and care you've shown me is something I'll cherish forever. Today, the most amazing person I know was born, and I'm endlessly grateful for you.
+
+Happiest birthday, my sweetheart! ❤ </p> </div>
+
+<div class="gallery-heading">Sweet Memory</div>
+<div class="image-gallery">
+  <img src="img1.jpg" alt="Image 1">
+  <img src="img2.jpg" alt="Image 2">
+  <img src="img3.jpg" alt="Image 3">
+  <img src="img4.jpg" alt="Image 4">
+</div>
+
+  </div>  <script>
+    function checkCode() {
+      const code = document.getElementById("unlockCode").value;
+      if (code.trim().toLowerCase() === "baandru") {
+        const light = document.getElementById("lightFlash");
+        light.style.display = 'block';
+        setTimeout(() => {
+          document.getElementById("lockScreen").style.display = "none";
+          document.getElementById("main-content").style.display = "block";
+          light.style.display = 'none';
+          const music = document.getElementById("birthdayMusic");
+          if (music.paused) music.play();
+        }, 5000);
+      } else {
+        alert("Incorrect code. Please try again!");
+      }
+    }
+  </script></body>
+</html>
